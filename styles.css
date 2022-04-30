@@ -10,13 +10,13 @@
     align-self: flex-start;
 }
 
-.wrapper {
+.colorPickerWrapper {
     position: relative;
     height: 300px;
     display: flex;
 }
 
-.marker {
+.colorPickerMarker {
     position: absolute; 
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0);
@@ -25,6 +25,21 @@
     height: 8px;
 }
 
+.colorSliderWrapper {
+    position: relative;
+    height: 300px;
+    display: flex;
+}
+
 .colorSlider {
     align-self: flex-start;
+}
+
+.colorSliderMarker {
+    position: absolute; 
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0);
+    border-style: solid;
+    width: 8px;
+    height: 8px;
 }

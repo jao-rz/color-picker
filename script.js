@@ -2,20 +2,26 @@ const container = document.querySelector('.container');
 
 const colorPickerCanvas = document.querySelector('.colorPickerCanvas');
 
-const wrapper = document.querySelector('.wrapper')
+const colorPickerWrapper = document.querySelector('.colorPickerWrapper')
 
 const colorSlider = document.querySelector('.colorSlider');
 
-const marker = document.createElement('div');
-marker.classList.add('marker');
-marker.setAttribute('draggable', true);
-wrapper.appendChild(marker)
+const colorSliderWrapper = document.querySelector('.colorSliderWrapper');
 
+const colorSliderMarker = document.createElement('div');
+colorSliderMarker.classList.add('colorSliderMarker');
+colorSliderMarker.setAttribute('draggable', true);
+colorSliderWrapper.appendChild(colorSliderMarker);
+
+const colorPickerMarker = document.createElement('div');
+colorPickerMarker.classList.add('colorPickerMarker');
+colorPickerMarker.setAttribute('draggable', true);
+colorPickerWrapper.appendChild(colorPickerMarker);
 
 //ADD 2D CONTEXT TO COLOR PICKER CANVAS
 let colorPickerCtx = colorPickerCanvas.getContext('2d');
 
-var zoomLevel = getComputedStyle(document.body).zoom
+var zoomLevel = getComputedStyle(document.body).zoom;
 
 var colorPickerCanvasPerimeter = colorPickerCanvas.getBoundingClientRect();
 var color = 'blue';
@@ -52,24 +58,24 @@ colorPickerCanvas.addEventListener('click', (event) => {
   ctxB = imgData.data[2];
 
   //PLACE MARKER WHERE MOUSE IS CLICKED ON CANVAS
-  marker.style.top =  event.offsetY - 8 + 'px';
-  marker.style.left = event.offsetX - 8 + 'px';
+  colorPickerMarker.style.top =  event.offsetY - 8 + 'px';
+  colorPickerMarker.style.left = event.offsetX - 8 + 'px';
 
   document.body.style.backgroundColor = `rgb(${ctxR}, ${ctxG}, ${ctxB})`;
 });
 
-marker.addEventListener('dragstart', () => {
+colorPickerMarker.addEventListener('dragstart', () => {
     dragging = true;
 });
 
 colorPickerCanvas.addEventListener('dragover', (event) => {
     event.preventDefault();
     if (dragging) {
-        //GET COORDINATES OF MARKER WHILE BEING DRAGGED
+        //GET COORDINATES OF colorPickerMarker WHILE BEING DRAGGED
         let xCoordinates = event.offsetX;
         let yCoordinates = event.offsetY;
 
-        //CHANGE THE BACKGROUND COLOR WHILE MARKER IS DRAGGED
+        //CHANGE THE BACKGROUND COLOR WHILE colorPickerMarker IS DRAGGED
         let imgData = colorPickerCtx.getImageData(xCoordinates, yCoordinates, 1, 1);
         ctxR = imgData.data[0];
         ctxG = imgData.data[1];
@@ -79,13 +85,13 @@ colorPickerCanvas.addEventListener('dragover', (event) => {
     };
 });
 
-marker.addEventListener('dragend', (event) => {
+colorPickerMarker.addEventListener('dragend', (event) => {
     dragging = false;
 });
 
 colorPickerCanvas.addEventListener('drop', (event) => {
-  marker.style.top = event.offsetY - 8 + 'px';
-  marker.style.left = event.offsetX - 8 + 'px';
+  colorPickerMarker.style.top = event.offsetY - 8 + 'px';
+  colorPickerMarker.style.left = event.offsetX - 8 + 'px';
 });
 
 
@@ -135,5 +141,7 @@ colorSlider.addEventListener('click', (event) => {
   colorPickerCtx.fillRect(0, 0, 300, 300);
 
   //PLACE MARKER WHERE MOUSE IS CLICKED ON SLIDER
+  colorSliderMarker.style.top = event.offsetY + 'px';
+  colorSliderMarker.style.left = event.offsetX + 'px';
 
 });
