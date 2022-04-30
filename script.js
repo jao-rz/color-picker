@@ -24,7 +24,7 @@ let colorPickerCtx = colorPickerCanvas.getContext('2d');
 var zoomLevel = getComputedStyle(document.body).zoom;
 
 var colorPickerCanvasPerimeter = colorPickerCanvas.getBoundingClientRect();
-var color = 'blue';
+var color = 'red';
 var dragging = false;
 
 //CREATE A HORIZONTAL GRADIENT ON THE CANVAS
@@ -141,7 +141,6 @@ colorSlider.addEventListener('click', (event) => {
   colorPickerCtx.fillRect(0, 0, 300, 300);
 
   //PLACE MARKER WHERE MOUSE IS CLICKED ON SLIDER
-  colorSliderMarker.style.top = event.offsetY + 'px';
-  colorSliderMarker.style.left = event.offsetX + 'px';
+  colorSliderMarker.style.top = event.offsetY - 4 + 'px';
 
 });
